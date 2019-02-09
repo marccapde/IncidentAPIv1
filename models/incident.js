@@ -20,22 +20,25 @@ var Incident = mongoose.model('Incident', {
   date: {
     type: Date
   },
-  lat: {
+  latitude: {
     type: Number
   },
-  long: {
+  longitude: {
     type: Number
-  }
+  },
   photo: {
     type: String
   },
   comment: {
-
+    type: String
   },
   user: {
     type: String,
     default: false,
+  },
+  likes: {
+    type: Number
   }
 });
 
-module.exports = {Event};
+module.exports = {Incident};

@@ -13,6 +13,7 @@ const UserSchema = Schema({
   password: {type: String/*, select: false*/},
   signupDate: {type: Date, default: Date.now()},
   lastLogin: Date,
+  role: String
 });
 
 UserSchema.pre('save', function (next) {

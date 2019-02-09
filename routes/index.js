@@ -2,6 +2,7 @@
 
 const express       = require('express');
 const userCtrl      = require('../controllers/user');
+const incidentCtrl  = require('../controllers/incident');
 
 
 const api           = express.Router();
@@ -13,11 +14,14 @@ api.post('/signin', userCtrl.singIn);
 
 
 //listeners event
-/*api.get('/event', auth.isAuth, eventCtrl.getEvents);
-api.get('/event/:eventId', auth.isAuth, eventCtrl.getEventById);
-api.post('/event/', auth.isAuth, eventCtrl.saveEvent);
+
+api.get('/incidents/', incidentCtrl.getIncidents);
+api.get('/incidents/:incidentId', incidentCtrl.getIncidentById);
+api.post('/incidents/', incidentCtrl.saveIncident);
+/*
 api.put('/event/:eventId', auth.isAuth,  eventCtrl.updateEvent);
 api.delete('/event/:eventId', auth.isAuth,  eventCtrl.deleteEvent);
-api.get('/events/avaiable/:latitud/:longitud', auth.isAuth, eventCtrl.avaiableEvents);*/
+api.get('/events/avaiable/:latitud/:longitud', auth.isAuth, eventCtrl.avaiableEvents);
+*/
 
 module.exports = api;
