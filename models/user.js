@@ -11,6 +11,9 @@ const UserSchema = Schema({
   lastName: String,
   avatar: String,
   password: {type: String/*, select: false*/},
+  dni: String,
+  photo: String,
+  validated: {type: Boolean, default: false},
   signupDate: {type: Date, default: Date.now()},
   lastLogin: Date,
   role: String

@@ -12,6 +12,8 @@ function singUp(req,res) {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: req.body.password,
+        dni: req.body.dni,
+        photo: req.body.photo
     });
 
     user.save((err) => {
@@ -40,7 +42,29 @@ function singIn(req,res) {
     });
 }
 
+function getUsers(req, res) {
+    User.find({activated: false}, (err, user) => {
+        if(err) return res.status(500).send({message: `Se ha producido un error`});
+        res.status(200).send({
+            users: user,
+        });
+    });
+}
+
+function validateUser(req, res) {
+    var userId = req.params.userId;
+
+}
+
+function deleteUser(req, res) {
+    var userId = req.params.userId;
+    //User.findByIdAndDelete({id: userId}, ())
+}
+
 module.exports = {
     singUp,
     singIn,
+    getUsers,
+    validateUser,
+    deleteUser
 }

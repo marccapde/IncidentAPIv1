@@ -2,14 +2,17 @@
 
 const mongoose = require('mongoose');
 const {Incident} = require('../models/incident');
-const fs = require('fs')
+const fs = require('fs');
+var path = require('path');
+
+
 
 function getIncidents(req, res) {
     Incident.find().then((incidents) => {
         res.send({incidents});
     }, (e) => {
         res.status(400).send(e);
-    });
+    }); 
 }
 
 function getIncidentById(req, res) {
@@ -25,7 +28,7 @@ function getIncidentById(req, res) {
 }
 
 function saveIncident(req, res) {
-    console.log(req.files);
+    console.log(req);
     var incident = new Incident({
         category: req.body.category,
         subcategory: req.body.subcategory,
@@ -33,7 +36,7 @@ function saveIncident(req, res) {
         date: new Date(),
         latitude: req.body.latitude,
         longitude: req.body.longitude,
-        // photo: req
+        photo: req.body.photo,
         comment: req.body.comment,
         user: req.body.user,
         likes: 1
