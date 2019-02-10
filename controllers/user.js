@@ -53,7 +53,7 @@ function getUsersNotValidated(req, res) {
 
 
 function getUsers(req, res) {
-    User.find(), (err, users) => {
+    User.find().then((err, users) => {
         if(err) return res.status(500).send({message: `Se ha producido un error`});
         res.status(200).send({
             users
