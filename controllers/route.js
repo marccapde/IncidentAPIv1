@@ -39,6 +39,19 @@ function saveRoute(req, res) {
       });
 }
 
+function updateRoute(req, res) {
+    var routeId = req.params.routeId;
+    var body = req.body;
+    Route.findByIdAndUpdate(routeId, {$set: body}, {new: true}).then((route) => {
+    if (!route) {
+      return res.status(404).send();
+    }
+    res.send({route});
+  }).catch((e) => {
+    res.status(400).send();
+  })
+}
+
 function deleteRouteById(req, res) {
     var id = req.params.routeId;
     Route.findByIdAndRemove(id).then((route) => {
@@ -55,7 +68,8 @@ module.exports = {
     getRoutes,
     getRouteById,
     saveRoute,
-    deleteRouteById
+    deleteRouteById,
+    updateRoute
 }
 
 

@@ -42,8 +42,8 @@ function singIn(req,res) {
     });
 }
 
-function getUsers(req, res) {
-    User.find({activated: false}, (err, user) => {
+function getUsersNotValidated(req, res) {
+    User.find({validated: false}, (err, user) => {
         if(err) return res.status(500).send({message: `Se ha producido un error`});
         res.status(200).send({
             users: user,
@@ -51,20 +51,50 @@ function getUsers(req, res) {
     });
 }
 
+
+function getUsers(req, res) {
+    User.find(), (err, users) => {
+        if(err) return res.status(500).send({message: `Se ha producido un error`});
+        res.status(200).send({
+            users
+        });
+    });
+}
+
 function validateUser(req, res) {
     var userId = req.params.userId;
-
+    var body = req.body;
+    User.findByIdAndUpdate(userId, {$set: body}, {new: true}).then((user) => {
+    if (!user) {
+      return res.status(404).send();
+    }
+    res.send({user});
+  }).catch((e) => {
+    res.status(400).send();
+  })
 }
 
 function deleteUser(req, res) {
     var userId = req.params.userId;
-    //User.findByIdAndDelete({id: userId}, ())
+    console.log(userId);
+    User.remove({
+        _id: req.params.userId,
+      }, function (err, user) {
+        if (err)
+          return console.error(err);
+
+        console.log('User successfully removed from users collection!');
+        res.send({user});
+
+
+      });
 }
 
 module.exports = {
     singUp,
     singIn,
-    getUsers,
+    getUsersNotValidated,
     validateUser,
-    deleteUser
+    deleteUser,
+    getUsers
 }

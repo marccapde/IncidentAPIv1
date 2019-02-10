@@ -28,18 +28,11 @@ function getIncidentById(req, res) {
 }
 
 function saveIncident(req, res) {
-    console.log(req);
+    console.log(req.body);
     var incident = new Incident({
-        category: req.body.category,
-        subcategory: req.body.subcategory,
-        state: req.body.state,
-        date: new Date(),
+        name: req.body.description,
         latitude: req.body.latitude,
-        longitude: req.body.longitude,
-        photo: req.body.photo,
-        comment: req.body.comment,
-        user: req.body.user,
-        likes: 1
+        longitude: req.body.longitude
     });
 
     incident.save().then((doc) => {

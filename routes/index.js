@@ -13,9 +13,10 @@ const auth          = require('../middlewares/auth');
 //listeners user
 api.post('/signup', userCtrl.singUp);
 api.post('/signin', userCtrl.singIn);
-api.get('/usersNotValidated', auth.isAuth, userCtrl.getUsers);
-api.put('/user/:userId', auth.isAuth, userCtrl.validateUser);
-api.delete('/user/:userId', auth.isAuth, userCtrl.deleteUser);
+api.get('/usersNotValidated', userCtrl.getUsersNotValidated);
+api.get('/users', userCtrl.getUsers);
+api.put('/users/:userId', userCtrl.validateUser);
+api.delete('/users/:userId', userCtrl.deleteUser);
 
 
 //listeners event
@@ -23,9 +24,11 @@ api.delete('/user/:userId', auth.isAuth, userCtrl.deleteUser);
 api.get('/incidents/', incidentCtrl.getIncidents);
 api.get('/incidents/:incidentId', incidentCtrl.getIncidentById);
 api.post('/incidents/', incidentCtrl.saveIncident);
-api.get('/routes/', auth.isAuth, routeCtrl.getRoutes);
-//api.get('/routes/:routeId', auth.isAuth, routeCtrl.getRouteById);
-//api.delete('/routes/:routeId', auth.isAuth, routeCtrl.deleteRouteById);
+api.get('/routes/', routeCtrl.getRoutes);
+api.get('/routes/:routeId', routeCtrl.getRouteById);
+api.post('/routes', routeCtrl.saveRoute);
+api.put('/routes', routeCtrl.updateRoute);
+api.delete('/routes/:routeId', routeCtrl.deleteRouteById);
 
 
 /*

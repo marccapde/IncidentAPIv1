@@ -5,7 +5,8 @@ var Route = mongoose.model('Route', {
   longitudeIni: Number,
   latitudeEnd: Number,
   longitudeEnd: Number,
-  user: String
+  user: String,
+  minions: Array
 });
 
 module.exports = {Route};
